@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e8f7ff">
+  <title>El Mundo Mágico de los Sonidos</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="cloud cloud-one" aria-hidden="true">☁️</div><div class="cloud cloud-two" aria-hidden="true">☁️</div>
+  <main id="app">
+    <section id="home" class="screen active" aria-labelledby="home-title">
+      <header class="hero">
+        <span class="pill">✨ ¡Una aventura para escuchar, jugar y aprender!</span>
+        <h1 id="home-title">El Mundo Mágico<br>de los <span>Sonidos</span> 🎵</h1>
+        <p>¡Escoge un mundo y comienza la aventura!</p>
+      </header>
+      <div class="worlds" aria-label="Seleccionar mundo">
+        <button class="world forest" data-world="forest" aria-label="Entrar al Bosque de los Sonidos, para 3 años">
+          <span class="world-art" aria-hidden="true">🌳<span class="little-animal">🐻</span></span>
+          <span class="world-tag">3 añitos</span>
+          <strong>El Bosque de los Sonidos</strong>
+          <small>Escucha y descubre animales</small>
+          <span class="enter">¡Jugar! →</span>
+        </button>
+        <button class="world factory" data-world="factory" aria-label="Entrar a La Fábrica de Palabras, para 4 años">
+          <span class="world-art" aria-hidden="true">🚂<span class="little-animal">🍬</span></span>
+          <span class="world-tag">4 añitos</span>
+          <strong>La Fábrica de Palabras</strong>
+          <small>Rimas y sílabas divertidas</small>
+          <span class="enter">¡Jugar! →</span>
+        </button>
+        <button class="world detective" data-world="detective" aria-label="Entrar a Detectives de Letras y Sonidos, para 5 años">
+          <span class="world-art" aria-hidden="true">🔎<span class="little-animal">🦊</span></span>
+          <span class="world-tag">5 añitos</span>
+          <strong>Detectives de Sonidos</strong>
+          <small>Encuentra los sonidos iniciales</small>
+          <span class="enter">¡Jugar! →</span>
+        </button>
+      </div>
+      <p class="footer-note">🌈 Aprende a tu ritmo · Sin puntos negativos · Con ayuda de un adulto cuando la necesites</p>
+    </section>
+
+    <section id="forest" class="screen" aria-labelledby="forest-title">
+      <div class="toolbar"><button class="back" data-back="home">← Mapa mágico</button><button class="sound-toggle" id="voice-toggle" aria-pressed="true">🔊 Voz activada</button></div>
+      <header class="hero compact"><span class="pill">🌳 Mundo 1 · 3 años</span><h2 id="forest-title">El Bosque de los Sonidos</h2><p>¡Escucha con atención! ¿Quién está escondido?</p></header>
+      <div class="game-panel">
+        <div class="challenge"><span class="mascot" aria-hidden="true">🦉</span><div><h3>¿Quién hace este sonido?</h3><p>Pulsa la oreja para escuchar una pista.</p></div></div>
+        <button class="listen" id="play-sound" aria-label="Escuchar sonido del animal">👂 <span>¡Escuchar!</span></button>
+        <div class="choices" id="choices" aria-label="Escoge el animal"></div>
+        <p id="feedback" class="feedback" role="status" aria-live="polite">¡Elige el animal que escuchaste!</p>
+        <div class="game-actions"><span id="round-label">Ronda 1 de 5</span><button id="next-round" class="next" hidden>¡Siguiente aventura! ➜</button></div>
+      </div>
+    </section>
+
+    <section id="factory" class="screen" aria-labelledby="factory-title">
+      <div class="toolbar"><button class="back" data-back="home">← Mapa mágico</button><button class="sound-toggle" data-voice-toggle aria-pressed="true">🔊 Voz activada</button></div>
+      <header class="hero compact"><span class="pill">🚂 Mundo 2 · 4 años</span><h2 id="factory-title">La Fábrica de Palabras</h2><p>¡Jugamos con rimas y sílabas!</p></header>
+      <div class="activity-grid" aria-label="Juegos de la fábrica">
+        <button class="activity-card" data-game="train"><span>🚂</span><strong>El tren de las sílabas</strong><small>Cuenta los golpes de voz</small></button>
+        <button class="activity-card" data-game="rhymes"><span>🎴</span><strong>Parejas que riman</strong><small>Encuentra los sonidos parecidos</small></button>
+        <button class="activity-card" data-game="monster"><span>👾</span><strong>Alimenta al monstruo</strong><small>Escucha y elige su comida</small></button>
+      </div>
+    </section>
+
+    <section id="detective" class="screen" aria-labelledby="detective-title">
+      <div class="toolbar"><button class="back" data-back="home">← Mapa mágico</button><button class="sound-toggle" data-voice-toggle aria-pressed="true">🔊 Voz activada</button></div>
+      <header class="hero compact"><span class="pill">🔎 Mundo 3 · 5 años</span><h2 id="detective-title">Detectives de Letras y Sonidos</h2><p>¡Descubre los sonidos escondidos!</p></header>
+      <div class="activity-grid" aria-label="Juegos de detectives">
+        <button class="activity-card" data-game="vacuum"><span>🫧</span><strong>Aspiradora de sonidos</strong><small>Atrapa los sonidos iniciales</small></button>
+        <button class="activity-card" data-game="intruder"><span>🕵️</span><strong>¿Cuál es el intruso?</strong><small>Descubre el sonido diferente</small></button>
+        <button class="activity-card" data-game="complete"><span>🧩</span><strong>Completa la palabra</strong><small>Escucha el final que falta</small></button>
+      </div>
+    </section>
+
+    <section id="activity" class="screen" aria-labelledby="activity-title">
+      <div class="toolbar"><button id="back-to-world" class="back">← Juegos del mundo</button><button class="sound-toggle" data-voice-toggle aria-pressed="true">🔊 Voz activada</button></div>
+      <header class="hero compact"><span class="pill" id="activity-world">✨ Aventura</span><h2 id="activity-title">¡Vamos a jugar!</h2><p id="activity-subtitle">Escucha atentamente.</p></header>
+      <div class="game-panel activity-panel">
+        <div id="activity-figure" class="activity-figure" aria-hidden="true">🚂</div>
+        <button id="activity-listen" class="listen" aria-label="Repetir la consigna y los sonidos">👂 ¡Escuchar otra vez!</button>
+        <div id="activity-prompt" class="activity-prompt"></div>
+        <div id="activity-options" class="activity-options" aria-label="Opciones del juego"></div>
+        <p id="activity-feedback" class="feedback" role="status" aria-live="polite">¡Tú puedes!</p>
+        <div class="game-actions"><span id="activity-progress">Ronda 1 de 4</span><button id="activity-next" class="next" hidden>¡Siguiente! ➜</button></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
