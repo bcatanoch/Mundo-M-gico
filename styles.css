@@ -107,3 +107,687 @@ button:focus-visible{outline:3px solid #4655a0;outline-offset:3px}
 }
 @media (hover:none){.world:hover,.activity-card:hover,.play-option:hover{transform:none}.world,.activity-card,.play-option{transition:background .15s,transform .15s}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.cloud,.world-art,.activity-figure{animation:none}}
+
+/* V4 · Reino de las Oraciones */
+.adventure-divider{text-align:center;margin:35px auto 16px;max-width:650px}
+.adventure-divider span{display:inline-block;background:#fff3c7;border-radius:30px;padding:8px 18px;font-weight:900;color:#75530e}
+.adventure-divider h2{font-size:clamp(1.6rem,4vw,2.5rem);margin:10px 0;color:#66499b}
+.adventure-divider p{color:#59647a;margin:0}
+.kingdom-entry{max-width:400px;margin:0 auto 18px}.sentence-world{width:100%;background:linear-gradient(155deg,#f4ddff,#d9cbff);border-color:#9d82d8}
+.kingdom-grid{max-width:450px;margin:15px auto}.coming-soon{text-align:center;color:#637086;padding:10px}
+.sentence-panel{max-width:1060px;margin:0 auto;background:linear-gradient(160deg,#fffefa,#f3f5ff);border:4px solid #fff;border-radius:30px;padding:clamp(14px,3vw,28px);box-shadow:0 10px 32px #47549322;min-width:0}
+.train-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px}
+.train-instruction{display:flex;flex-direction:column;gap:4px;font-size:1.12rem;color:#48486b}.train-instruction strong{font-size:1.3rem}.train-instruction span{font-size:.98rem}
+.small-listen{font-size:1rem;margin:0;padding:12px 17px;min-height:48px}
+.sentence-train{display:grid;grid-template-columns:minmax(112px,1.12fr) repeat(4,minmax(0,1fr));align-items:stretch;gap:9px;margin-bottom:25px}
+.train-engine,.sentence-wagon{border:3px solid #fff;border-radius:24px;box-shadow:0 7px 0 #7783a044;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;min-height:220px;padding:13px 7px;gap:8px;cursor:pointer;font:inherit;text-align:center;transition:transform .15s,box-shadow .15s;position:relative;overflow-wrap:anywhere}
+.train-engine:hover,.sentence-wagon:hover{transform:translateY(-4px)}.train-engine:active,.sentence-wagon:active{transform:translateY(3px);box-shadow:0 3px 0 #7783a044}
+.train-engine{background:linear-gradient(160deg,#be93f4,#8663d6);color:white}.engine-emoji{font-size:clamp(3.2rem,6vw,5rem);line-height:1.1}.train-engine strong{font-size:1.05rem;line-height:1.2}.train-engine small{font-size:.9rem;color:#fff}
+.sentence-wagon.who{background:#ffcf8a;color:#623a1b}.sentence-wagon.verb{background:#a6eab0;color:#204b31}.sentence-wagon.thing{background:#b0dbff;color:#24466c}.sentence-wagon.place{background:#ffe898;color:#68511b}
+.wagon-heading{font-size:clamp(.68rem,1vw,.9rem);font-weight:900;letter-spacing:.02em;min-height:20px}.wagon-emoji{font-size:clamp(2.4rem,4.6vw,4rem);line-height:1.3}.sentence-wagon strong{font-size:clamp(.95rem,1.5vw,1.2rem);line-height:1.22;min-height:2.5em;display:flex;align-items:center;justify-content:center}.sentence-wagon small{font-size:.82rem;font-weight:750;opacity:.8}
+.sentence-display{background:white;border:2px dashed #b6a0e9;border-radius:22px;text-align:center;padding:18px 14px}.sentence-display span{font-weight:800;color:#7a57bf}.sentence-display p{font-size:clamp(1.3rem,3vw,2rem);color:#344269;font-weight:900;margin:9px 0 0;overflow-wrap:anywhere}
+.sentence-actions{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:10px;margin:18px 0}.sentence-actions .listen{margin:0;font-size:1.1rem}.sentence-actions .next,.sentence-actions .back{min-height:50px}
+.sentence-panel .feedback{text-align:center}.sentence-hint{font-size:.88rem;line-height:1.5;color:#656b82;text-align:center;margin:16px auto 0;max-width:750px}
+@media(max-width:800px){.sentence-train{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.train-engine{grid-column:1/-1;min-height:145px;flex-direction:row;gap:18px}.train-engine strong br{display:none}.train-engine .engine-emoji{font-size:3.4rem}.sentence-wagon{min-height:175px}.wagon-heading{font-size:.83rem}.sentence-wagon strong{font-size:1.1rem;min-height:1.4em}.wagon-emoji{font-size:3.1rem}}
+@media(max-width:390px){.sentence-panel{padding:10px;border-radius:20px}.sentence-train{gap:7px}.sentence-wagon{padding:10px 4px;min-height:163px;border-radius:17px}.sentence-wagon strong{font-size:.92rem}.wagon-emoji{font-size:2.6rem}.wagon-heading{font-size:.69rem}.train-engine{min-height:122px}.sentence-actions{flex-direction:column}.sentence-actions button{width:100%}}
+@media(prefers-reduced-motion:reduce){.train-engine,.sentence-wagon{transition:none}.train-engine:hover,.sentence-wagon:hover{transform:none}}
+
+/* V4.1: corrección de la tarjeta única del Reino de las Oraciones.
+   La cuadrícula global de actividades tiene 3 columnas; aquí debe haber solo una. */
+#kingdom .kingdom-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  width:100%;
+  max-width:460px;
+  margin:22px auto;
+}
+#kingdom .kingdom-grid .activity-card{
+  width:100%;
+  max-width:none;
+  min-width:0;
+  grid-column:auto;
+  min-height:320px;
+  padding:24px 22px;
+  overflow-wrap:normal;
+  word-break:normal;
+  white-space:normal;
+}
+#kingdom .kingdom-grid .activity-card strong{
+  font-size:clamp(1.25rem,3vw,1.65rem);
+  line-height:1.3;
+  max-width:100%;
+  text-wrap:balance;
+}
+#kingdom .kingdom-grid .activity-card small{
+  line-height:1.5;
+  font-size:1rem;
+}
+#home .kingdom-entry{width:100%;max-width:440px;margin:0 auto 18px}
+#home .kingdom-entry .sentence-world{width:100%;min-width:0}
+@media(max-width:720px){
+  #kingdom .kingdom-grid{max-width:440px;margin:18px auto}
+  #kingdom .kingdom-grid .activity-card{min-height:290px;padding:24px 18px}
+  #kingdom .kingdom-grid .activity-card span:first-child{font-size:4rem}
+}
+@media(max-width:375px){
+  #kingdom .kingdom-grid .activity-card{min-height:265px}
+}
+
+/* V4.2: dos etiquetas en la banda de la oración */
+#sentence-progress{display:block;margin-bottom:6px;color:#52629d;font-size:.92rem;font-weight:800}
+.sentence-wagon:focus-visible,.train-engine:focus-visible{outline:4px solid #354c99;outline-offset:3px}
+@media(max-width:600px){.sentence-actions .next{width:100%;max-width:360px;font-weight:850}}
+
+
+/* V4.4 · Fábrica de Criaturas y Objetos */
+#kingdom .kingdom-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:920px;align-items:stretch}
+#kingdom .kingdom-grid .activity-card{min-height:290px}
+#kingdom .kingdom-grid .activity-card span:first-child{font-size:3.9rem}
+#kingdom .kingdom-grid .creature-card{background:linear-gradient(155deg,#e9fce6,#d6efff)}
+#kingdom .kingdom-grid .creature-card strong{font-size:clamp(1.15rem,2vw,1.5rem)}
+.kingdom-note{text-align:center;color:#637086;font-weight:650;margin:18px auto}
+.creature-panel{max-width:1050px;margin:auto;padding:clamp(14px,3vw,28px);border-radius:30px;border:4px solid #fff;background:#ffffffd9;box-shadow:0 14px 32px #37536822}
+.creature-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.creature-header strong{font-size:1.35rem;color:#4955a0}.creature-header p{margin:5px 0;color:#60718b;font-weight:800}
+.creature-task{background:#fff4c9;border:2px dashed #eebf54;border-radius:22px;margin:18px auto;padding:12px 18px;display:flex;gap:10px;align-items:center;justify-content:center;text-align:center;font-size:1.24rem;font-weight:850;color:#6f4e14}.creature-task p{margin:0}
+.creature-layout{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:23px;align-items:start}
+.creature-preview-wrap{text-align:center;min-width:0}.creature-stage{min-height:315px;border-radius:28px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at 55% 65%,#ffffff 0%,#f5eaff 57%,#e8f8ff 100%);border:3px solid #eee4ff}
+.sparkle{position:absolute;font-size:2.2rem;color:#9e7de7;pointer-events:none}.sparkle.s1{top:12%;left:14%}.sparkle.s2{bottom:18%;right:14%}
+.character{--char:#9c76e7;transform:scale(1);transition:transform .25s;position:relative;width:220px;height:245px;display:flex;align-items:center;justify-content:center}
+.character.is-small{transform:scale(.66)}.character.is-big{transform:scale(1.06)}.character.is-red{--char:#fa726c}.character.is-blue{--char:#65aeea}.character.is-purple{--char:#a47be2}.character.is-green{--char:#6fd3a3}
+.monster-figure{position:relative;width:200px;height:205px}.monster-body{position:absolute;inset:28px 12px 12px;border:5px solid #ffffff90;border-radius:47% 47% 38% 38%;background:var(--char);box-shadow:inset -15px -13px 0 #3a37651c,0 17px 0 #49417a12;overflow:hidden}
+.horn{position:absolute;top:8px;border-left:19px solid transparent;border-right:19px solid transparent;border-bottom:54px solid #f6ce74;z-index:0}.horn.left{left:29px;transform:rotate(-27deg)}.horn.right{right:29px;transform:rotate(27deg)}
+.eyes{position:absolute;top:36%;left:22%;right:22%;display:flex;justify-content:space-between}.eyes i{width:33px;height:39px;background:#fff;border-radius:50%;position:relative;box-shadow:inset 0 -3px #eeeeff}.eyes i:after{content:"";position:absolute;width:13px;height:18px;border-radius:50%;background:#24344c;left:11px;top:12px}
+.mouth{position:absolute;width:59px;height:30px;left:50%;top:65%;transform:translateX(-50%);border-bottom:7px solid #52375d;border-radius:0 0 55px 55px}.is-sad .mouth{border-bottom:0;border-top:7px solid #52375d;border-radius:55px 55px 0 0;top:72%}
+.blush{position:absolute;width:22px;height:11px;border-radius:50%;background:#ee59916b;top:60%}.blush.left{left:13%}.blush.right{right:13%}
+.foot{position:absolute;bottom:0;width:51px;height:24px;background:#615381;border-radius:50% 50% 30% 30%}.foot.left{left:30px}.foot.right{right:30px}
+.monster-texture,.ball-texture{position:absolute;inset:0;pointer-events:none;border-radius:inherit}
+.is-dots .monster-texture,.is-dots .ball-texture{background-image:radial-gradient(#ffffff8c 8px,transparent 9px);background-size:43px 43px}
+.is-stripes .monster-texture,.is-stripes .ball-texture{background-image:repeating-linear-gradient(135deg,transparent 0 16px,#ffffff61 16px 25px,transparent 25px 40px)}
+.ball-figure{display:none;width:175px;height:175px;position:relative;background:var(--char);border:5px solid #ffffffa8;border-radius:50%;box-shadow:inset -24px -22px 0 #293e6629,0 18px 0 #49417a14;overflow:hidden}
+.ball-shine{position:absolute;top:27px;left:37px;width:40px;height:22px;border-radius:50%;background:#ffffff99;transform:rotate(-34deg)}
+.is-ball .monster-figure{display:none}.is-ball .ball-figure{display:block}.is-ball .ball-texture{z-index:1}
+.creature-description{font-weight:850;color:#48558b;min-height:55px;font-size:1.06rem;line-height:1.45;margin:15px 0 6px}
+.creature-hear{background:#e7e0ff;border:2px solid #b4a1ec;color:#4b4085;border-radius:25px;padding:12px 18px;font-weight:850;min-height:50px}
+.creature-controls{display:grid;gap:12px;min-width:0}.creature-control-group{border:2px solid #e4e9fb;background:#f9fbff;border-radius:19px;padding:13px}.creature-control-group h3{font-size:1.02rem;margin:0 0 11px;color:#45527e}
+.creature-control-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.creature-control-options button{background:#fff;border:2px solid #d7def1;border-radius:15px;min-height:51px;padding:8px 9px;font-weight:800;color:#344562;overflow-wrap:anywhere}
+.creature-control-options button.selected{background:#def4df;border-color:#4aa66c;box-shadow:inset 0 0 0 1px #4aa66c}
+.creature-actions{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px}.creature-actions .listen{font-size:1rem;margin:0;padding:13px 18px}.creature-actions .next,.creature-actions .back{min-height:50px}
+.creature-panel>.feedback{text-align:center;margin-top:18px}
+@media(max-width:760px){.creature-layout{grid-template-columns:1fr}.creature-stage{min-height:270px}.creature-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.creature-control-options{grid-template-columns:1fr}}
+@media(max-width:650px){#kingdom .kingdom-grid{grid-template-columns:1fr;max-width:460px}#kingdom .kingdom-grid .activity-card{min-height:230px}.creature-controls{grid-template-columns:1fr}.creature-control-options{grid-template-columns:repeat(2,minmax(0,1fr))}.creature-task{font-size:1.05rem}.creature-actions{flex-direction:column}.creature-actions button{width:100%;max-width:390px}}
+@media(prefers-reduced-motion:reduce){.character{transition:none}}
+
+/* V4.5: aspecto neutro cuando todavía no se ha seleccionado una cualidad. */
+.character.is-unset-color{--char:#b8bfd0}
+.character.is-unset-size{transform:scale(.84)}
+.character.is-unset-mood .mouth{border-top:0;border-bottom:5px solid #52375d;border-radius:0;top:72%;height:4px}
+.creature-control-options button:focus-visible{outline:3px solid #4955a0;outline-offset:3px}
+
+
+/* V4.6 · Estudio de Acciones y Movimiento */
+#kingdom .kingdom-grid .movement-card{background:linear-gradient(150deg,#fff4d6,#e4f8fc)}
+.movement-panel{max-width:1100px;margin:auto;padding:clamp(14px,3vw,28px);background:#ffffffdd;border:4px solid white;border-radius:30px;box-shadow:0 14px 35px #405a7720}
+.movement-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.movement-top strong{font-size:1.32rem;color:#4854a0}
+.movement-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:start}
+.movement-preview{text-align:center;min-width:0}
+.movement-scene{height:320px;position:relative;overflow:hidden;isolation:isolate;border:3px solid #e4e2ff;border-radius:25px;background:linear-gradient(#b7eaff,#e7faff 75%);}
+.movement-scene.place-home{background:linear-gradient(#ffead8,#fff3e5 76%)}
+.movement-scene.place-garden{background:linear-gradient(#c7f6ee,#effff5 76%)}
+.movement-sun{position:absolute;top:16px;right:25px;font-size:3rem}.movement-cloud{position:absolute;top:29px;left:40px;font-size:2.6rem}
+.movement-place-emoji{position:absolute;bottom:39px;right:23px;font-size:4rem}
+.movement-ground{height:54px;position:absolute;left:0;right:0;bottom:0;background:#b9e8a4;border-top:5px solid #93c986;z-index:-1}.place-home .movement-ground{background:#edcfac;border-color:#d6b08b}
+.movement-character{position:absolute;bottom:55px;left:36%;font-size:6rem;line-height:1.2;transform-origin:center bottom;filter:drop-shadow(0 8px 6px #657a7d30)}
+.movement-effect{position:absolute;bottom:55px;left:58%;font-size:2.9rem;pointer-events:none}
+.movement-output{margin:18px 0 12px;padding:17px 12px;border:2px dashed #b9a7ec;border-radius:19px;background:#fff}
+.movement-output span{color:#7761ad;font-weight:800}.movement-output p{font-size:clamp(1.05rem,2.4vw,1.5rem);font-weight:850;color:#334575;margin:8px 0}
+.movement-controls{display:grid;gap:12px;min-width:0}.movement-group{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;border:2px solid #e2e7fb;border-radius:19px;background:#f8faff;padding:14px;min-width:0}
+.movement-group legend{font-weight:900;color:#485487;padding:0 5px;font-size:1.05rem}
+.movement-group button{min-height:53px;border-radius:15px;background:white;border:2px solid #d8def4;color:#32476d;font-weight:850;padding:8px;overflow-wrap:anywhere}
+.movement-group button.selected{border-color:#4dac72;background:#dff5e4}
+.movement-group button:focus-visible{outline:3px solid #4556ac;outline-offset:2px}
+.movement-group button:disabled{opacity:.45;cursor:not-allowed}.movement-help{grid-column:1/-1;margin:2px;color:#61718a;font-size:.85rem}
+.movement-actions-row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:19px}.movement-actions-row .listen{font-size:1rem;margin:0;padding:14px 19px}.movement-actions-row .back,.movement-actions-row .next{min-height:50px}
+.movement-panel>.feedback{text-align:center;margin:18px 0}
+.movement-character.action-run{animation:movement-run 1s ease-in-out infinite alternate}
+.movement-character.action-walk{animation:movement-walk 2s ease-in-out infinite alternate}
+.movement-character.action-jump{animation:movement-jump 1.45s ease-in-out infinite}
+.movement-character.action-eat{animation:movement-eat 1.2s ease-in-out infinite}
+.movement-character.action-sleep{animation:movement-sleep 2.3s ease-in-out infinite}
+.movement-character.speed-fast.action-run,.movement-character.speed-fast.action-walk,.movement-character.speed-fast.action-jump,.movement-character.speed-fast.action-eat{animation-duration:.55s}
+.movement-character.speed-slow.action-run,.movement-character.speed-slow.action-walk,.movement-character.speed-slow.action-jump,.movement-character.speed-slow.action-eat{animation-duration:2s}
+@keyframes movement-run{0%{left:10%;transform:scaleX(1) rotate(-7deg)}100%{left:68%;transform:scaleX(1) rotate(7deg)}}
+@keyframes movement-walk{0%{left:15%;transform:rotate(-3deg)}100%{left:62%;transform:rotate(3deg)}}
+@keyframes movement-jump{0%,100%{transform:translateY(0)}50%{transform:translateY(-90px)}}
+@keyframes movement-eat{0%,100%{transform:rotate(0)}50%{transform:rotate(10deg) scale(.94)}}
+@keyframes movement-sleep{0%,100%{transform:rotate(75deg) scale(.88)}50%{transform:rotate(75deg) scale(.83)}}
+@media(max-width:760px){.movement-layout{grid-template-columns:1fr}.movement-scene{height:280px}.movement-character{font-size:5rem}}
+@media(max-width:520px){.movement-actions-row{flex-direction:column}.movement-actions-row button{width:100%;max-width:390px;margin:auto}.movement-group{gap:7px;padding:10px}.movement-group button{font-size:.93rem}.movement-place-emoji{font-size:3.3rem}}
+@media(prefers-reduced-motion:reduce){.movement-character{animation:none!important}}
+
+
+/* V4.7 — Zona de acción separada del paisaje (escritorio y móvil).
+   El personaje y los efectos se animan únicamente en los 2/3 izquierdos. */
+.movement-scene .movement-ground { z-index:0; }
+.movement-place-emoji {
+  z-index:1; right:3%; bottom:55px; width:34%;
+  display:flex; align-items:flex-end; justify-content:center;
+  white-space:nowrap; font-size:clamp(2.4rem,4vw,3.6rem);
+  line-height:1.15; pointer-events:none;
+}
+.movement-character {
+  z-index:2; left:13%; bottom:55px; width:24%; text-align:center;
+  font-size:clamp(4rem,6vw,5.7rem);
+}
+.movement-effect {
+  z-index:3; left:35%; bottom:128px; width:18%; text-align:center;
+  font-size:clamp(1.6rem,3vw,2.5rem); line-height:1.2;
+}
+.movement-character.action-eat ~ .movement-effect {bottom:65px;left:39%;}
+.movement-character.action-sleep ~ .movement-effect {bottom:142px;left:35%;}
+.movement-character.action-walk ~ .movement-effect {bottom:70px;left:34%;}
+.movement-character.action-run ~ .movement-effect {bottom:89px;left:35%;}
+.movement-character.action-jump ~ .movement-effect {bottom:145px;left:35%;}
+/* Los recorridos nunca invaden el tercio derecho reservado al paisaje. */
+@keyframes movement-run {
+  0% {left:7%;transform:rotate(-7deg)}
+  100% {left:38%;transform:rotate(7deg)}
+}
+@keyframes movement-walk {
+  0% {left:9%;transform:rotate(-3deg)}
+  100% {left:35%;transform:rotate(3deg)}
+}
+@media(max-width:520px) {
+  .movement-place-emoji {right:2%;width:34%;font-size:clamp(2.1rem,8vw,3rem)}
+  .movement-character {font-size:clamp(3.7rem,13vw,5rem);width:25%}
+  .movement-effect {font-size:clamp(1.5rem,7vw,2.1rem)}
+}
+
+
+/* V4.8 — Movimiento coherente: personaje + efecto unidos dentro del mismo actor.
+   Los paisajes se sitúan encima del área transitable, dejando libre TODO el piso. */
+.movement-scene {isolation:isolate;}
+.movement-scene .movement-ground {z-index:0;}
+.movement-scene .movement-sun,.movement-scene .movement-cloud {z-index:1;pointer-events:none;}
+.movement-scene .movement-place-emoji {
+  position:absolute;right:18px;left:auto;top:auto;bottom:56px;
+  width:150px;max-width:40%;height:92px;
+  z-index:1;pointer-events:none;
+}
+.movement-scene .movement-place-emoji .scene-item{
+  position:absolute;display:block;line-height:1;
+  font-size:clamp(2.5rem,4.2vw,3.6rem);
+  filter:drop-shadow(0 3px 2px #00000015);
+  bottom:0;
+}
+.movement-scene .movement-place-emoji .item-1{left:10px;bottom:0;}
+.movement-scene .movement-place-emoji .item-2{right:2px;bottom:0;}
+.movement-scene .movement-actor {
+  position:absolute;bottom:54px;left:2%;height:112px;width:106px;
+  z-index:3;overflow:visible;transform-origin:center bottom;
+  --travel:calc(100cqw - 124px);
+}
+.movement-scene {container-type:inline-size;}
+.movement-scene .movement-character {
+  position:absolute;bottom:0;left:0;width:100%;height:auto;
+  font-size:5.7rem;line-height:1.12;text-align:center;
+  filter:drop-shadow(0 7px 4px #657a7d30);
+  animation:none;transform-origin:center bottom;
+}
+.movement-scene .movement-effect {
+  position:absolute;bottom:62px;right:-7px;left:auto;width:auto;height:auto;
+  font-size:2.6rem;line-height:1;z-index:4;
+  pointer-events:none;filter:drop-shadow(0 2px 2px #00000015);
+}
+/* Desplazamiento de extremo a extremo sobre la franja del piso */
+.movement-scene .movement-actor.action-run {animation:actor-travel .95s linear infinite alternate;}
+.movement-scene .movement-actor.action-walk {animation:actor-travel 2.2s linear infinite alternate;}
+.movement-scene .movement-actor.speed-fast.action-run,
+.movement-scene .movement-actor.speed-fast.action-walk {animation-duration:1s;}
+.movement-scene .movement-actor.speed-slow.action-run,
+.movement-scene .movement-actor.speed-slow.action-walk {animation-duration:2.8s;}
+@keyframes actor-travel {from {transform:translateX(0)}to {transform:translateX(max(0px, var(--travel)))}}
+/* El movimiento de cabeza/patas no interfiere con el desplazamiento horizontal */
+.movement-scene .movement-actor.action-run .movement-character {animation:bunny-run .24s ease-in-out infinite alternate;}
+.movement-scene .movement-actor.action-walk .movement-character {animation:bunny-walk .55s ease-in-out infinite alternate;}
+@keyframes bunny-run {to{transform:translateY(-12px) rotate(7deg)}}
+@keyframes bunny-walk {to{transform:translateY(-4px) rotate(2deg)}}
+/* Las huellas viajan pegadas al conejito y nunca se quedan en el fondo */
+.movement-scene .movement-actor.action-run .movement-effect,
+.movement-scene .movement-actor.action-walk .movement-effect {
+  bottom:8px;right:auto;left:-17px;font-size:2.2rem;
+  animation:footprints .42s linear infinite alternate;
+}
+@keyframes footprints {from{opacity:.45;transform:translateY(1px) scale(.85)}to{opacity:1;transform:translateY(-3px) scale(1)}}
+/* Al saltar los destellos acompañan al personaje */
+.movement-scene .movement-actor.action-jump {animation:bunny-hop 1.35s ease-in-out infinite;}
+.movement-scene .movement-actor.speed-fast.action-jump {animation-duration:.75s;}
+.movement-scene .movement-actor.speed-slow.action-jump {animation-duration:1.8s;}
+@keyframes bunny-hop {0%,100%{transform:translateY(0)}45%{transform:translateY(-74px)}}
+.movement-scene .movement-actor.action-jump .movement-effect {bottom:84px;right:-11px;font-size:2.3rem;animation:sparkle-pop 1s ease-in-out infinite alternate;}
+@keyframes sparkle-pop {to{transform:rotate(24deg) scale(1.2)}}
+/* La zanahoria aparece justo junto a la boca */
+.movement-scene .movement-actor.action-eat .movement-character {animation:bunny-nibble .9s ease-in-out infinite;}
+.movement-scene .movement-actor.action-eat .movement-effect {right:-2px;bottom:26px;font-size:2.7rem;animation:carrot-nibble .9s ease-in-out infinite;}
+@keyframes bunny-nibble {50%{transform:rotate(6deg)}}
+@keyframes carrot-nibble {50%{transform:translateX(-8px) translateY(-8px) rotate(-12deg)}}
+/* La nube de sueño permanece próxima a la cabeza incluso al inclinarse */
+.movement-scene .movement-actor.action-sleep .movement-character {transform:rotate(70deg) scale(.86);animation:bunny-breath 2.2s ease-in-out infinite;}
+.movement-scene .movement-actor.action-sleep .movement-effect {bottom:54px;left:58px;right:auto;font-size:2.4rem;animation:dream-float 2.2s ease-in-out infinite;}
+@keyframes bunny-breath {50%{transform:rotate(70deg) scale(.81)}}
+@keyframes dream-float {50%{transform:translate(6px,-10px);opacity:.65}}
+@media(max-width:520px){
+  .movement-scene .movement-actor {width:84px;height:94px;--travel:calc(100cqw - 102px)}
+  .movement-scene .movement-character {font-size:4.65rem}
+  .movement-scene .movement-effect {font-size:2rem}
+  .movement-scene .movement-place-emoji {width:122px;max-width:42%;height:70px;right:10px;bottom:54px;top:auto}
+  .movement-scene .movement-place-emoji .scene-item{font-size:2.35rem;bottom:0}
+  .movement-scene .movement-place-emoji .item-1{left:2px;bottom:0}
+  .movement-scene .movement-place-emoji .item-2{right:0;bottom:0}
+}
+@supports not (width:1cqw){
+  .movement-scene .movement-actor {--travel:180px}
+  @media(max-width:520px){.movement-scene .movement-actor{--travel:100px}}
+}
+@media(prefers-reduced-motion:reduce){
+  .movement-scene .movement-actor,.movement-scene .movement-character,.movement-scene .movement-effect{animation:none!important}
+}
+
+/* V4.11: el conejito permanece en el centro al saltar, comer o dormir.
+   Para correr y caminar conserva su recorrido completo por el suelo. */
+.movement-scene .movement-actor:is(.action-jump,.action-eat,.action-sleep) {
+  left:50%;
+  margin-left:-53px; /* mitad del ancho de 106px */
+}
+@media (max-width:520px) {
+  .movement-scene .movement-actor:is(.action-jump,.action-eat,.action-sleep) {
+    margin-left:-42px; /* mitad del ancho móvil de 84px */
+  }
+}
+
+
+/* V4.12 — Máquina del Tiempo */
+.time-card{background:linear-gradient(145deg,#fff3d3,#e6dfff)}
+.time-panel{max-width:1100px;margin:0 auto;background:#fffdfd;border-radius:30px;padding:clamp(16px,3vw,35px);box-shadow:0 14px 28px #40487d16}
+.time-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;color:#474f8e}
+.time-head strong{font-size:1.3rem}.time-head p{margin:6px 0;color:#6b7096;font-weight:800}
+.time-story{display:flex;align-items:center;justify-content:center;gap:18px;margin:18px 0 16px;border:2px solid #e7dffa;background:linear-gradient(100deg,#f3ecff,#e5faff);border-radius:24px;padding:17px}
+.time-story-emoji{font-size:clamp(3.6rem,8vw,6rem);line-height:1.25}
+.time-mini{display:block;font-size:clamp(1rem,2.2vw,1.28rem);color:#6b55a7;font-weight:900;text-decoration:none}
+.time-story p{margin:6px 0 0;color:#414877;font-size:clamp(1.05rem,2.6vw,1.48rem);font-weight:900}
+.time-question{border:2px dashed #f7bd54;background:#fff7dc;border-radius:18px;display:flex;align-items:center;justify-content:center;gap:9px;padding:13px;text-align:center;color:#74521a;font-weight:900;font-size:clamp(1rem,2.6vw,1.25rem)}
+.time-question p{margin:0}
+.time-portals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:20px 0}
+.time-portal{border:4px solid #fff;border-radius:26px;padding:15px 8px;min-width:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:7px;min-height:230px;color:#34385f;box-shadow:0 6px 0 #33415b22,0 12px 18px #25395a17;cursor:pointer;transition:transform .15s,outline .15s;font-family:inherit}
+.time-portal:hover{transform:translateY(-4px)}.time-portal:focus-visible{outline:4px solid #5964ce;outline-offset:3px}
+.time-portal.yesterday{background:linear-gradient(155deg,#e6d8c8,#d0b593);filter:sepia(.12)}
+.time-portal.today{background:linear-gradient(145deg,#c4f5e0,#90dbe9)}
+.time-portal.tomorrow{background:linear-gradient(145deg,#f4d8ff,#c7b9ff)}
+.time-portal-sky{font-size:clamp(3.4rem,7vw,5.6rem);line-height:1.25}
+.time-portal-title{font-size:clamp(1.25rem,3vw,1.8rem);font-weight:1000;letter-spacing:.06em}
+.time-portal-description{font-size:.86rem;font-weight:750;text-align:center}
+.time-portal-play{font-size:.86rem;font-weight:900;background:#ffffffaa;border-radius:50px;padding:5px 12px}
+.time-portal.wrong{animation:time-nudge .35s ease-in-out}
+@keyframes time-nudge{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.time-portal.right{outline:4px solid #45b876;outline-offset:1px;box-shadow:0 7px 0 #2d9254}
+.time-portal:disabled{cursor:default;opacity:.8}.time-portal.right:disabled{opacity:1}
+.time-sequence{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.time-sequence>div{border:2px solid #e5dcf9;border-radius:16px;padding:12px 8px;background:#fcfaff;display:flex;align-items:center;flex-direction:column;gap:6px;text-align:center;min-width:0}
+.time-sequence span{font-weight:900;color:#68538c}.time-sequence b{font-size:clamp(.79rem,1.8vw,1rem);color:#46517d}
+.time-sequence:not(.revealed) b{filter:blur(5px);user-select:none}.time-sequence.revealed b{filter:none}
+.time-feedback{text-align:center;min-height:38px;color:#485494;font-weight:900;font-size:1.1rem;margin:18px 0 8px}
+.time-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:12px 0}
+@media(max-width:600px){.time-portals{gap:7px}.time-portal{min-height:168px;padding:11px 3px;border-radius:17px;border-width:2px;gap:4px}.time-portal-sky{font-size:2.55rem}.time-portal-title{font-size:1.05rem}.time-portal-description{font-size:.7rem}.time-portal-play{font-size:.68rem;padding:4px 6px}.time-story{padding:12px;gap:9px}.time-sequence{gap:6px}.time-sequence>div{padding:8px 4px}.time-sequence span{font-size:.8rem}}
+@media(max-width:350px){.time-portals{grid-template-columns:1fr}.time-portal{min-height:120px;display:grid;grid-template-columns:60px 1fr;justify-items:center}.time-portal-sky{grid-row:span 3}}
+@media(prefers-reduced-motion:reduce){.time-portal{transition:none}.time-portal.wrong{animation:none}}
+
+/* V4.13: portales para escuchar, tarjetas inferiores para responder. */
+.time-guide{font-weight:900;text-align:center;color:#5b5492;margin:17px 0 -7px;font-size:clamp(.94rem,2.5vw,1.08rem)}
+.time-portal.heard{outline:3px solid #62b98b;outline-offset:-5px}
+.time-portal.heard .time-portal-play{background:#e1f8e8;color:#246b44}
+.time-portal .time-portal-play{min-height:32px;display:flex;align-items:center}
+.time-sequence>.time-answer{
+  border:2px solid #e5dcf9;border-radius:16px;padding:14px 8px;
+  background:#fcfaff;display:flex;align-items:center;flex-direction:column;
+  justify-content:center;gap:7px;text-align:center;min-width:0;
+  min-height:100px;cursor:pointer;font:inherit;
+}
+.time-sequence .time-answer span{font-weight:1000;color:#564e96;font-size:clamp(.88rem,2.3vw,1.1rem)}
+.time-sequence .time-answer b{font-size:clamp(.74rem,1.6vw,.88rem);color:#46517d}
+.time-sequence .time-answer small{color:#5b6396;font-weight:900}
+.time-sequence:not(.revealed) .time-answer{opacity:.62;cursor:not-allowed}
+.time-sequence:not(.revealed) .time-answer b,.time-sequence:not(.revealed) .time-answer small{filter:blur(4px);user-select:none}
+.time-sequence.revealed .time-answer{background:linear-gradient(#fff,#f2edff);box-shadow:0 4px 0 #3a386122}
+.time-answer:not(:disabled):hover{transform:translateY(-2px);border-color:#8a7ee8}
+.time-answer:focus-visible{outline:4px solid #5f62c9;outline-offset:2px}
+.time-answer.wrong{animation:time-nudge .35s ease-in-out}
+.time-sequence .time-answer.right,.time-sequence.revealed .time-answer.right{background:#d7f4de;border-color:#38a563;box-shadow:0 4px 0 #228447}
+.time-sequence .time-answer:disabled{cursor:default}
+@media(max-width:600px){.time-sequence>.time-answer{padding:10px 3px;min-height:98px;gap:5px}.time-answer small{font-size:.72rem}}
+
+
+/* V4.14 — Detectives Preguntones. Escenas táctiles accesibles sin lectura. */
+.question-card{background:linear-gradient(145deg,#e5f7ff,#e9e1ff)}
+.questions-panel{max-width:1100px;margin:0 auto;padding:clamp(14px,3vw,34px);background:#fff;border-radius:30px;box-shadow:0 12px 26px #3c4c8218}
+.questions-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;color:#444f8f}
+.questions-top strong{font-size:1.4rem}.questions-top p{color:#66739b;font-weight:800;margin:6px 0}
+.questions-story{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:16px 0;padding:12px 16px;background:#ecf7ff;border:2px solid #d6eafa;border-radius:18px}
+.questions-story>span{font-size:2rem}.questions-story p{margin:0;flex:1;min-width:190px;color:#394d7c;font-weight:750}.questions-story button{font-size:.91rem}
+.questions-ask{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;padding:13px 16px;border:2px dashed #e8a83f;border-radius:22px;background:#fff5d7;text-align:center;color:#654a21}
+.questions-ask>span{font-size:3rem}.questions-ask>div{flex:1;min-width:200px}.questions-ask small{font-weight:800;color:#9c702c}.questions-ask p{margin:4px 0;font-size:clamp(1.1rem,3vw,1.5rem);font-weight:950}
+.questions-tip{margin:15px 0 8px;text-align:center;font-weight:850;color:#5a62a1}
+.questions-picture{position:relative;min-height:390px;border:4px solid #e6dfff;border-radius:27px;overflow:hidden;background:linear-gradient(180deg,#bceaff 0%,#effbff 73%,#bee9aa 74%,#9bd385 100%)}
+.questions-picture.scene-farm{background:linear-gradient(#b8edfc 0%,#e7f9ff 64%,#d1eaa2 65%,#96c86b 100%)}
+.questions-picture.scene-classroom{background:linear-gradient(#fff0cd 0%,#fffaef 74%,#d6b78c 75%,#c49b75 100%)}
+.questions-picture:before{content:'☁️';position:absolute;left:5%;top:5%;font-size:3rem;opacity:.8;pointer-events:none}
+.questions-picture.scene-classroom:before{content:'🪟';top:3%;left:4%;font-size:4rem;opacity:.7}
+.questions-picture:after{content:'✨';position:absolute;right:5%;top:5%;font-size:2.3rem;pointer-events:none}
+.question-object{position:absolute;left:var(--qx);top:var(--qy);transform:translate(-50%,-50%);border:3px solid #ffffffd9;box-shadow:0 6px 10px #35436e1f;background:#ffffffa8;border-radius:22px;min-width:86px;min-height:93px;max-width:27%;padding:10px 7px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;color:#34476d;font:inherit;cursor:pointer;touch-action:manipulation;transition:background .12s,box-shadow .12s}
+.question-object .question-object-emoji{font-size:clamp(2.4rem,5vw,4rem);line-height:1.12;pointer-events:none}
+.question-object .question-object-label{font-weight:850;font-size:clamp(.68rem,1.5vw,.86rem);text-align:center;overflow-wrap:anywhere;pointer-events:none}
+.question-object:hover{background:#fffdf1;box-shadow:0 8px 13px #35436e2e}
+.question-object:focus-visible{outline:4px solid #5264d2;outline-offset:2px}
+.question-object.correct{border-color:#35ad69;background:#c9f7d7;box-shadow:0 0 0 4px #64c78b88}
+.question-object.wrong{animation:question-wiggle .33s ease-in-out;background:#fff1e4}
+@keyframes question-wiggle{0%,100%{transform:translate(-50%,-50%)}25%{transform:translate(calc(-50% - 5px),-50%)}75%{transform:translate(calc(-50% + 5px),-50%)}}
+.questions-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:14px 0}
+@media(max-width:600px){.questions-picture{min-height:350px}.question-object{min-width:68px;min-height:75px;padding:6px 3px;border-radius:15px}.question-object .question-object-emoji{font-size:2.6rem}.question-object .question-object-label{font-size:.68rem}.questions-ask>span{font-size:2rem}.questions-ask>div{min-width:150px}.questions-story p{min-width:130px}}
+@media(max-width:370px){.questions-picture{min-height:350px}.question-object{min-width:57px;max-width:29%;min-height:70px}.question-object .question-object-emoji{font-size:2.2rem}.question-object .question-object-label{font-size:.6rem}.questions-ask{gap:5px;padding:10px 5px}}
+@media(prefers-reduced-motion:reduce){.question-object{transition:none}.question-object.wrong{animation:none}}
+
+/* V4.15: cada respuesta ocupa una celda exclusiva, sin superposición.
+   Se respetan el paisaje, los efectos y los botones táctiles. */
+#question-detectives .questions-picture {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(132px, 1fr));
+  place-items: center;
+  align-content: center;
+  column-gap: clamp(12px, 3vw, 32px);
+  row-gap: 16px;
+  padding: 30px clamp(14px, 3vw, 36px);
+  min-height: 390px;
+}
+#question-detectives .questions-picture .question-object {
+  position: relative;
+  left: auto !important;
+  top: auto !important;
+  transform: none;
+  width: min(100%, 155px);
+  max-width: 100%;
+  min-width: 0;
+  min-height: 116px;
+  height: auto;
+  margin: 0;
+  padding: 10px 8px;
+  z-index: 1;
+}
+#question-detectives .questions-picture .question-object .question-object-label {
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+#question-detectives .questions-picture .question-object.wrong {
+  animation: question-grid-wiggle .33s ease-in-out;
+}
+@keyframes question-grid-wiggle {
+  0%,100% {transform:translateX(0)}
+  25% {transform:translateX(-5px)}
+  75% {transform:translateX(5px)}
+}
+@media(max-width:600px) {
+  #question-detectives .questions-picture {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(115px, auto));
+    column-gap: 12px;
+    row-gap: 12px;
+    padding: 22px 14px;
+    min-height: 0;
+  }
+  #question-detectives .questions-picture .question-object {
+    width: min(100%, 150px);
+    min-height: 108px;
+    padding: 9px 5px;
+  }
+}
+@media(max-width:370px) {
+  #question-detectives .questions-picture {padding:16px 9px;gap:9px}
+  #question-detectives .questions-picture .question-object {min-height:100px}
+}
+@media(prefers-reduced-motion:reduce) {
+  #question-detectives .questions-picture .question-object.wrong {animation:none}
+}
+
+
+/* V4.16 — menú del Reino: tarjetas proporcionadas y botones legibles.
+   Reglas específicas para evitar que .activity-card span agrande los CTA. */
+#kingdom .kingdom-grid {
+  display:grid;grid-template-columns:repeat(6,minmax(0,1fr));
+  max-width:1080px;width:100%;gap:20px;align-items:stretch;
+  margin:24px auto 32px;
+}
+#kingdom .kingdom-grid > .activity-card {
+  grid-column:span 2;justify-self:stretch;align-self:stretch;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  width:100%;max-width:none;min-width:0;min-height:272px;
+  padding:22px 16px 18px;gap:10px;text-align:center;
+  border-radius:24px;white-space:normal;overflow-wrap:normal;
+}
+#kingdom .kingdom-grid > .activity-card:nth-child(4) {grid-column:2 / span 2;}
+#kingdom .kingdom-grid > .activity-card:nth-child(5) {grid-column:4 / span 2;}
+#kingdom .kingdom-grid > .activity-card > span:first-child {
+  display:block;font-size:2.8rem;line-height:1.15;min-height:50px;
+}
+#kingdom .kingdom-grid > .activity-card > strong {
+  display:block;font-size:clamp(1.05rem,1.6vw,1.3rem);line-height:1.25;
+  max-width:100%;text-wrap:balance;overflow-wrap:break-word;
+}
+#kingdom .kingdom-grid > .activity-card > small {
+  display:block;font-size:.88rem;line-height:1.4;max-width:100%;
+  text-wrap:pretty;color:#4d5b72;
+}
+#kingdom .kingdom-grid > .activity-card > .enter {
+  display:flex;align-items:center;justify-content:center;
+  margin-top:auto;width:100%;max-width:240px;min-height:48px;
+  padding:10px 14px;border-radius:18px;
+  font-size:clamp(1rem,1.7vw,1.15rem);font-weight:900;line-height:1.2;
+  white-space:normal;text-align:center;overflow-wrap:normal;
+  background:#4655a0;color:white;box-shadow:0 4px 0 #2a397f;
+}
+@media(max-width:850px){
+  #kingdom .kingdom-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:700px;gap:16px}
+  #kingdom .kingdom-grid > .activity-card,
+  #kingdom .kingdom-grid > .activity-card:nth-child(4){grid-column:auto;}
+  #kingdom .kingdom-grid > .activity-card:nth-child(5){grid-column:1 / -1;max-width:340px;justify-self:center;}
+  #kingdom .kingdom-grid > .activity-card{min-height:240px;padding:18px 14px;}
+}
+@media(max-width:600px){
+  #kingdom .kingdom-grid{grid-template-columns:1fr;max-width:420px;gap:14px}
+  #kingdom .kingdom-grid > .activity-card,
+  #kingdom .kingdom-grid > .activity-card:nth-child(4),
+  #kingdom .kingdom-grid > .activity-card:nth-child(5){
+    grid-column:1;max-width:none;min-height:215px;width:100%;
+  }
+  #kingdom .kingdom-grid > .activity-card > span:first-child {font-size:2.5rem;min-height:44px;}
+  #kingdom .kingdom-grid > .activity-card > strong{font-size:1.15rem;}
+  #kingdom .kingdom-grid > .activity-card > .enter{font-size:1rem;min-height:46px;}
+}
+
+/* V4.17 · Dos ambientes independientes en el mapa principal */
+.adventure-hubs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:950px;margin:26px auto 10px;gap:24px}
+.hub-entry{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:370px;width:100%;padding:28px 22px;gap:16px;border:4px solid white;border-radius:32px;color:#304260;text-align:center;box-shadow:0 12px 0 #36517213,0 19px 32px #314b6220;transition:transform .18s,box-shadow .18s;min-width:0}
+.hub-entry:hover,.hub-entry:focus-visible{transform:translateY(-5px);box-shadow:0 16px 0 #36517213,0 23px 36px #314b6220}
+.hub-sounds{background:linear-gradient(145deg,#d9f9bf,#a8e4eb)}
+.hub-words{background:linear-gradient(145deg,#f5dcff,#d8ceff)}
+.hub-scene{font-size:clamp(3rem,5vw,4.5rem);line-height:1.4;white-space:normal;filter:drop-shadow(0 6px 4px #36517220)}
+.hub-entry strong{font-size:clamp(1.55rem,2.8vw,2rem);line-height:1.2;overflow-wrap:normal}
+.hub-entry small{font-size:1rem;line-height:1.5;max-width:320px}
+.hub-cta{background:#4655a0;color:white;font-size:1.05rem;font-weight:850;padding:13px 24px;min-height:48px;border-radius:32px;box-shadow:0 5px 0 #2a397f;display:inline-flex;align-items:center;justify-content:center;max-width:100%}
+#sounds-hub .worlds{max-width:1050px;margin:26px auto}
+@media (min-width:721px) and (max-width:1024px){.adventure-hubs{grid-template-columns:repeat(2,minmax(0,1fr))}.adventure-hubs .hub-entry{min-height:325px}}
+@media(max-width:720px){.adventure-hubs{grid-template-columns:1fr;max-width:460px;gap:18px;margin:18px auto}.hub-entry{min-height:245px;padding:22px 16px;gap:9px}.hub-scene{font-size:3.3rem}.hub-entry strong{font-size:1.5rem}.hub-entry small{font-size:.95rem}#sounds-hub .worlds{grid-template-columns:1fr;max-width:460px}}
+@media(prefers-reduced-motion:reduce){.hub-entry{transition:none}.hub-entry:hover{transform:none}}
+
+/* V4.18: escuchar al tocar el animal; responder con un control independiente. */
+#forest .choices {align-items:stretch;}
+#forest .animal-card {min-width:0;display:flex;flex-direction:column;gap:9px;}
+#forest .animal-preview {
+  width:100%;height:100%;min-height:145px;padding:13px 8px;
+  flex:1;display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center;
+}
+#forest .animal-preview strong {font-size:1.12rem;}
+#forest .animal-preview small {font-size:.82rem;color:#40518c;letter-spacing:.01em;}
+#forest .animal-select {
+  width:100%;min-height:48px;border:2px solid #4856a5;border-radius:17px;
+  background:#fff;color:#3d4d99;font-weight:850;font-size:1rem;
+  touch-action:manipulation;box-shadow:0 3px 0 #bcc6e2;
+}
+#forest .animal-select:hover:not(:disabled){background:#f0f3ff}
+#forest .animal-card.correct .animal-preview,
+#forest .animal-select.correct{background:#d8f6da;border-color:#43aa66;color:#28603b;}
+#forest .animal-select:disabled{cursor:default;opacity:.7}
+@media(max-width:720px){
+ #forest .animal-preview{min-height:112px;padding:10px 5px}
+ #forest .animal-preview strong{font-size:.98rem}
+ #forest .animal-preview small{font-size:.72rem}
+ #forest .animal-select{font-size:.91rem;padding:8px 3px;min-height:45px}
+}
+
+/* V4.19: premio de finalización compartido en todas las aventuras */
+.reward-overlay[hidden]{display:none!important}
+.reward-overlay{
+  position:fixed;inset:0;z-index:9999;display:grid;place-items:center;
+  padding:20px;background:rgba(28,38,78,.66);overflow-y:auto;
+}
+.reward-panel{
+  width:min(100%,530px);max-height:calc(100dvh - 32px);overflow-y:auto;
+  padding:clamp(20px,5vw,38px);text-align:center;
+  background:linear-gradient(155deg,#fffbe6 0%,#fff 52%,#e8f8ff 100%);
+  border:5px solid #fff;border-radius:32px;box-shadow:0 18px 65px #17234b55;
+  animation:reward-appear .38s ease-out;
+}
+.reward-sparkles{font-size:clamp(22px,5vw,35px)}
+.reward-trophy{font-size:clamp(70px,16vw,112px);line-height:1.2;animation:reward-bounce .9s ease-in-out 2}
+.reward-panel h2{font-size:clamp(1.7rem,5vw,2.55rem);color:#40539a;line-height:1.2;margin:8px 0}
+.reward-subtitle{font-size:clamp(1.05rem,3vw,1.35rem);font-weight:800;color:#3a4266;margin:8px 0}
+.reward-stars{font-size:clamp(1.9rem,6vw,3rem);letter-spacing:5px;margin:12px 0}
+.reward-detail{color:#4b567b;font-size:1rem;margin:10px 0 22px}
+.reward-actions{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}
+.reward-actions button{font-size:1rem;min-height:52px;white-space:normal}
+@keyframes reward-appear{from{opacity:0;transform:translateY(18px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes reward-bounce{0%,100%{transform:scale(1)}50%{transform:scale(1.12) rotate(5deg)}}
+@media(max-width:430px){.reward-actions{flex-direction:column}.reward-actions button{width:100%}}
+@media(prefers-reduced-motion:reduce){.reward-panel,.reward-trophy{animation:none}}
+
+/* V4.20: el botón de avance debe ocultarse cuando una ronda aún no está resuelta.
+   .next fija display:inline-block, por eso el atributo hidden necesitaba prioridad. */
+#next-round[hidden]{display:none!important}
+
+
+/* V4.21: Alimenta al monstruo. Escuchar y elegir son acciones separadas. */
+#activity-options.monster-fruit-grid{align-items:stretch;}
+.monster-fruit-card{min-width:0;display:flex;flex-direction:column;gap:9px;}
+.monster-fruit-preview{
+  width:100%;height:100%;min-height:145px;padding:13px 8px;
+  flex:1;display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center;
+}
+.monster-fruit-preview strong{font-size:1.12rem;line-height:1.25;}
+.monster-fruit-preview small{font-size:.82rem;color:#40518c;letter-spacing:.01em;}
+.monster-fruit-choose{
+  width:100%;min-height:48px;border:2px solid #4856a5;border-radius:17px;
+  background:#fff;color:#3d4d99;font-weight:850;font-size:1rem;
+  touch-action:manipulation;box-shadow:0 3px 0 #bcc6e2;
+}
+.monster-fruit-choose:hover:not(:disabled){background:#f0f3ff;}
+.monster-fruit-card.correct .monster-fruit-preview,
+.monster-fruit-choose.correct{background:#d8f6da;border-color:#43aa66;color:#28603b;}
+.monster-fruit-card button:disabled{cursor:default;opacity:.8;}
+@media(max-width:720px){
+  .monster-fruit-preview{min-height:112px;padding:10px 5px;}
+  .monster-fruit-preview .big{font-size:2.8rem;}
+  .monster-fruit-preview strong{font-size:.98rem;}
+  .monster-fruit-preview small{font-size:.72rem;}
+  .monster-fruit-choose{font-size:.91rem;padding:8px 3px;min-height:45px;}
+}
+
+#activity-options.vacuum-listen-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  max-width:680px;
+  margin:14px auto;
+  align-items:stretch;
+}
+.vacuum-card{min-width:0;display:flex;flex-direction:column;gap:9px;}
+.vacuum-card .monster-fruit-preview{min-height:118px;}
+.vacuum-card .monster-fruit-preview .big{font-size:3.1rem;}
+.vacuum-card .monster-fruit-preview strong{font-size:1.08rem;line-height:1.2;}
+.vacuum-card .monster-fruit-preview small{font-size:.82rem;color:#40518c;}
+.vacuum-card.correct .monster-fruit-preview,
+.vacuum-card .monster-fruit-choose.correct{background:#d8f6da;border-color:#43aa66;color:#28603b;}
+@media(max-width:720px){
+  #activity-options.vacuum-listen-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:none;gap:10px;}
+  .vacuum-card .monster-fruit-preview{min-height:110px;padding:10px 5px;}
+  .vacuum-card .monster-fruit-preview .big{font-size:2.7rem;}
+  .vacuum-card .monster-fruit-preview strong{font-size:.96rem;}
+  .vacuum-card .monster-fruit-choose{font-size:.9rem;padding:8px 4px;min-height:44px;}
+}
+
+#activity-options.intruder-listen-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  max-width:760px;
+  margin:14px auto;
+  align-items:stretch;
+}
+.intruder-card{min-width:0;display:flex;flex-direction:column;gap:9px;}
+.intruder-preview{min-height:118px;}
+.intruder-preview .big{font-size:3.15rem;}
+.intruder-preview strong{font-size:1.08rem;line-height:1.2;}
+.intruder-preview small{font-size:.82rem;color:#40518c;}
+.intruder-card.correct .intruder-preview,
+.intruder-card .monster-fruit-choose.correct{background:#d8f6da;border-color:#43aa66;color:#28603b;}
+@media(max-width:720px){
+  #activity-options.intruder-listen-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:none;gap:10px;}
+  .intruder-preview{min-height:110px;padding:10px 5px;}
+  .intruder-preview .big{font-size:2.7rem;}
+  .intruder-preview strong{font-size:.96rem;}
+  .intruder-card .monster-fruit-choose{font-size:.9rem;padding:8px 4px;min-height:44px;}
+}
+
+/* V4.24 · Completa la palabra: dos opciones centradas y controles separados */
+#activity-options.complete-vowel-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  max-width:540px;
+  width:100%;
+  margin:16px auto;
+  gap:15px;
+  align-items:stretch;
+}
+.complete-vowel-card{min-width:0;display:flex;flex-direction:column;gap:10px;}
+.complete-vowel-preview{width:100%;min-height:137px;}
+.complete-vowel-preview .big{font-size:3.6rem;line-height:1;}
+.complete-vowel-preview strong{font-size:1.06rem;}
+.complete-vowel-preview small{font-size:.81rem;color:#40518c;}
+.complete-vowel-card.correct .complete-vowel-preview,
+.complete-vowel-card .monster-fruit-choose.correct{
+  background:#d8f6da;border-color:#43aa66;color:#28603b;
+}
+@media(max-width:720px){
+  #activity-options.complete-vowel-grid{max-width:440px;gap:10px;}
+  .complete-vowel-preview{min-height:115px;padding:10px 5px;}
+  .complete-vowel-preview .big{font-size:3rem;}
+  .complete-vowel-preview strong{font-size:.95rem;}
+  .complete-vowel-card .monster-fruit-choose{min-height:44px;font-size:.91rem;}
+}
+
+.time-underline{display:inline-block;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px;text-decoration-color:#f0b64e;font-weight:1000;}
+
+/* V4.26: Una sola oración grande, centrada y fácil de leer */
+.time-story .time-story-content{flex:0 1 auto;min-width:0;display:flex;align-items:center;justify-content:center;}
+.time-story #time-story-text{margin:0;color:#414877;font-size:clamp(1.65rem,3.7vw,2.65rem);font-weight:950;line-height:1.3;text-align:center;letter-spacing:-.015em;}
+.time-story #time-story-text .time-underline{text-decoration-thickness:4px;text-underline-offset:6px;}
+@media(max-width:600px){
+  .time-story{gap:12px;padding:16px 12px;}
+  .time-story-emoji{font-size:clamp(3rem,12vw,4.2rem);flex-shrink:0;}
+  .time-story #time-story-text{font-size:clamp(1.35rem,5vw,1.85rem);}
+}
